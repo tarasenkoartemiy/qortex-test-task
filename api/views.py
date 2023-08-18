@@ -9,12 +9,12 @@ class ExecutorViewSet(ModelViewSet):
 
 
 class TrackViewSet(ModelViewSet):
-    queryset = Track.objects.all()
+    queryset = Track.objects.prefetch_related("album_set")
     serializer_class = TrackSerializer
 
 
 class AlbumViewSet(ModelViewSet):
-    queryset = Album.objects.all()
+    queryset = Album.objects.prefetch_related("tracks")
     serializer_class = AlbumSerializer
 
     def perform_destroy(self, instance):
